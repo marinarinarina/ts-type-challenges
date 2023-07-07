@@ -25,4 +25,4 @@ const userInfoBadCase: UserInfoTuple = ['user4@example.com', 4 , true , '2002-10
 const userInfoGoodCase: UserInfoTuple = [1, 'user1@example.com' , 'abcd123' , '1999-01-01' , true];
 
 // ------ 정답코드 ------
-type UserInfoTuple = [number, string, string, string, boolean];
+type UserInfoTuple = readonly [number, string, string, string, boolean];
