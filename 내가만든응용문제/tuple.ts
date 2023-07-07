@@ -19,9 +19,9 @@ const userInfo3 = [3, 'user3@example.com' , 'abcd12345' , '2001-03-15' , false];
 */
 
 // 예를 들어 아래는 배열 요소 규칙인 [유저의 고유 인덱스, 아이디, 패스워드, 생일날짜]와 맞지 않으므로 코드에 빨간 밑줄이 그어져야 합니다.
-const userInfoBadCase: UserInfoTuple = ['user4@example.com', 4 , true , '2002-10-25' , 'abcd123456'];
+const userInfoBadCase = ['user4@example.com', 4 , true , '2002-10-25' , 'abcd123456'];
 
 // 아래는 배열 요소 규칙에 맞게 작성했으므로 에러가 발생하지 않습니다.
-const userInfoGoodCase: UserInfoTuple = [1, 'user1@example.com' , 'abcd123' , '1999-01-01' , true];
+const userInfoGoodCase = [1, 'user1@example.com' , 'abcd123' , '1999-01-01' , true];
 
 // ------ 정답코드 ------
