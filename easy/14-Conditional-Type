@@ -1,0 +1,18 @@
+// 조건부타입 활용문제
+
+// 제네릭 T에 true가 들어오면 string 타입으로, false가 들어오면 error 타입으로 data 속성을 타입 지정
+interface MyResponse<T extends boolean> {
+    data: T extends true ? string : Error;
+    isString: T;
+}
+
+// 데이터 예시
+const res1: MyResponse<true> = {
+   data: '응답 성공', // String
+   isString: true,
+};
+
+const res2: MyResponse<false> = {
+   data: new Error("응답 실패"),
+   isString: false,
+};
