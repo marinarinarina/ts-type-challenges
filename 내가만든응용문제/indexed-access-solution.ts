@@ -9,7 +9,7 @@ const Users = [
   { name: "Sara", age: 20, major: "veterinary medicine", college: "medical" },
 ];
 
-// 이 배열을 활용하여 만든 Student type은 학생 정보 타입입니다. 타입 에러가 발생하지 않도록 적절한 Student 타입을 작성해주세요. 
+//  Student type은 Users를 활용해서 만들어야 합니다. 타입 에러가 발생하지 않도록 적절한 Student 타입을 작성해주세요. 
 const student: Student = {
     name: "Mason",
     age: 20,
