@@ -80,13 +80,17 @@ export function logPerson(person: Person) {
 
 export function filterUsers(persons: Person[], criteria: Partial<User>): User[] {
     return persons.filter(isUser).filter((user) => {
-        const criteriaKeys = Object.keys(criteria) as (keyof User)[];
+        const criteriaKeys = Object.keys(criteria) as (keyof User)[]; // 여기에서 as (keyof User)[]가 없다면 타입은 string[]
         return criteriaKeys.every((fieldName) => {
-            return user[fieldName] === criteria[fieldName];
+            return user[fieldName] === criteria[fieldName]; // 하지만 user의 인덱스 시그니처로 가능한 타입은 string이 아니라 type 또는 name 또는 age 또는 occupation
         });
     });
 }
-
+/*
+type E = (keyof User)[];
+const e1:E = ["type", "name", "age", "occupation"];
+const e2:E = ["type", "occupation"];
+*/
 console.log('Users of age 23:');
 
 filterUsers(
