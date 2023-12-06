@@ -87,6 +87,22 @@ export function promisify<T>(fn: callbackBasedAsyncFunction<T>): PromiseBasedAsy
     });
 }
 
+type SourceObject<T> = {
+    [K in keyof T]: CallbackBasedAsyncFunction<T[K]>;
+}
+
+type PromisifiedObject<T> = {
+    [K in keyof T]: PromiseBasedAsyncFunction<T[K]>;
+}
+
+export function promisifyAll<T extends {[key: string]: any}>(obj: SourceObject<T>): PromisifiedObject<T> {
+    const result: Partial<PromisifiedObject<T>> = {};
+    for(const key of Object.keys(obj) as (keyof T)[]) {
+        result[key] = promisify(obj[key]);
+    }
+    return result as PromisifiedObject<T>;
+}
+
 const oldApi = {
     requestAdmins(callback: (response: ApiResponse<Admin[]>) => void) {
         callback({
@@ -114,12 +130,13 @@ const oldApi = {
     }
 };
 
-export const api = {
-    requestAdmins: promisify(oldApi.requestAdmins),
-    requestUsers: promisify(oldApi.requestUsers),
-    requestCurrentServerTime: promisify(oldApi.requestCurrentServerTime),
-    requestCoffeeMachineQueueLength: promisify(oldApi.requestCoffeeMachineQueueLength)
-};
+export const api = promisifyAll(oldApi);
+// export const api = {
+//     requestAdmins: promisify(oldApi.requestAdmins),
+//     requestUsers: promisify(oldApi.requestUsers),
+//     requestCurrentServerTime: promisify(oldApi.requestCurrentServerTime),
+//     requestCoffeeMachineQueueLength: promisify(oldApi.requestCoffeeMachineQueueLength)
+// };
 
 function logPerson(person: Person) {
     console.log(
